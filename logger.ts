@@ -1,3 +1,4 @@
+import { NextFunction, Request, Response } from "express";
 import { getTimeStamp } from "./src/utils/common";
 
 class Logger {
@@ -9,15 +10,16 @@ class Logger {
     }
 
     log(log: any) {
-        console.log('\x1b[37m', `[${getTimeStamp()}] ` + log);  //yellow
+        console.log(`[${getTimeStamp()}] ` + log);
     }
 
     error(err: any) {
-        console.log('\x1b[31m', `[${getTimeStamp()}] ` + err);
+        console.log(`[${getTimeStamp()}] ` + err);
     }
 
-    logEvents(){
-        
+    logEvents(req: Request, res: Response, next: NextFunction) {
+        console.log(`[${getTimeStamp()}] ` + `[${req.headers.origin ?? 'localhost'}] [${req.method.toUpperCase()}] [${req.path}]`);
+        return next();
     }
 
 }

@@ -1,6 +1,7 @@
 import { config } from "dotenv";
 config();
-import { Sequelize } from "sequelize"
+import { Sequelize } from "sequelize-typescript"
+import User from "../src/model/User";
 
 const sequelize = new Sequelize(
     process.env.PG_DATABASE_NAME ?? '',
@@ -9,9 +10,12 @@ const sequelize = new Sequelize(
     {
         host: process.env.PG_DATABASE_HOST,
         port: Number(process.env.PG_DATABASE_PORT),
-        dialect: 'postgres'
+        dialect: 'postgres',
+        logging: true
     }
 )
+
+sequelize.addModels([User])
 
 export {
     sequelize
