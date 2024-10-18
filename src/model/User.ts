@@ -1,4 +1,5 @@
 import { Column, DataType, Default, Model, PrimaryKey, Table, Sequelize } from 'sequelize-typescript'
+import { Cast } from 'sequelize/types/utils'
 
 @Table({tableName:'users',modelName:'User',timestamps:false})
 export default class User extends Model<User>{
@@ -7,7 +8,6 @@ export default class User extends Model<User>{
     @Default(DataType.UUIDV4)
     @Column(DataType.CHAR)
     id: string
-
 
     @Column({
         type: DataType.STRING,
