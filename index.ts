@@ -17,8 +17,11 @@ const PORT = process.env.PORT || 8080;
 const server = app.listen(PORT, async () => {
 
     await sequelize.authenticate();
-
     const { address, port } = server.address() as AddressInfo;
-
     logger.log(`Server Started On Port ${address} ${port}`);
+    server.emit('connected');
 })
+
+export {
+    server
+};

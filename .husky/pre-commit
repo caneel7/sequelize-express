@@ -1,0 +1,17 @@
+echo "Running Testing Before Commit";
+
+set -e
+
+rm -rf ./build
+npm run build
+
+echo "Running Testing";
+
+npx cross-env PORT=8050 node ./test/app.test.js
+
+if [[ $? -ne 0 ]]; then
+    echo "Api Test Failed. Commit Aborted !!"
+    exit 1
+fi
+
+echo "Api Testing Completed. Commiting Changes"
