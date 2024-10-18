@@ -15,5 +15,3 @@ if [[ $? -ne 0 ]]; then
 fi
 
 echo "Api Testing Completed. Commiting Changes"
-
-npm run build
